@@ -1,0 +1,79 @@
+sim_eq_half_tank
+
+risultati di simulazione con forza esterna applicata a metà traiettoria, con raggiungimento dell'equilibrio di forze (l'oggetto non si muove)
+
+Forza:
+-4.8 N applicata dal secondo 5 al secondo 6
+
+Parametri tank:
+zita = 0.5, omega_n = 50, lambda(0,0), lamda(1,1) = 2 zita omega_n, D(0,0) = D(1,1) = 6, T_bar = 1, T_e = 0.001, z0 = 0.1
+
+
+
+sim_eq_half_no_tank
+
+risultati di simulazione con forza esterna applicata a metà traiettoria esattamente come prima. Il riferimento di traiettoria non è più stoppato mentre la forza è applicata. Il controllore sovrasta la forza esterna e segue il riferimento
+
+Forza:
+-4.8 N applicata dal secondo 5 al secondo 6
+
+
+
+
+
+
+
+
+sim_no_eq_half_tank
+
+risultati di simulazione con forza esterna applicata a metà traiettoria, senza raggiungimento dell'equilibrio di forze (l'oggetto si muove leggermente all'indietro)
+
+Forza:
+-5 N applicata dal secondo 5 al secondo 6
+
+Parametri tank:
+zita = 0.5, omega_n = 50, lambda(0,0), lamda(1,1) = 2 zita omega_n, D(0,0) = D(1,1) = 6, T_bar = 1, T_e = 0.001, z0 = 0.1
+
+
+
+
+
+sim_no_eq_half_no_tank
+
+risultati di simulazione con forza esterna applicata a metà traiettoria esattamente come prima. Il riferimento di traiettoria non è più stoppato mentre la forza è applicata. Il controllore sovrasta la forza esterna e segue il riferimento
+
+Forza:
+-5 N applicata dal secondo 5 al secondo 6
+
+
+
+
+
+
+
+sim_eq_beg_tank
+
+risultati di simulazione con forza esterna applicata a inizio traiettoria, con raggiungimento dell'equilibrio di forze (l'oggetto non si muove)
+
+Forza:
+-3 N applicata dal secondo 1 al secondo 2
+
+Parametri tank:
+zita = 0.5, omega_n = 50, lambda(0,0), lamda(1,1) = 2 zita omega_n, D(0,0) = D(1,1) = 6, T_bar = 1, T_e = 0.001, z0 = 0.1
+
+
+
+
+
+sim_eq_beg_no_tank
+
+risultati di simulazione con forza esterna applicata a inizio traiettoria esattamente come prima. Il riferimento di traiettoria non è più stoppato mentre la forza è applicata. Il controllore sovrasta la forza esterna e segue il riferimento
+
+Forza:
+-3 N applicata dal secondo 1 al secondo 2
+
+Parametri tank:
+zita = 0.5, omega_n = 50, lambda(0,0), lamda(1,1) = 2 zita omega_n, D(0,0) = D(1,1) = 6, T_bar = 1, T_e = 0.001, z0 = 0.1
+
+
+
