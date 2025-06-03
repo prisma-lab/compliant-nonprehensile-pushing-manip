@@ -46,7 +46,7 @@ namespace raisim_pushing{
 
 //box material (steel) and appereance (red) are hard-coded
 #define box_material "steel"
-#define box_appearance "1,0,0,1"
+#define box_appearance "1,0,0,0.5"
 
 //Material pair properties (brass and steel)
 #define friction 0.2
@@ -68,6 +68,12 @@ class Raisim_pushing{
         raisim::Box* box; //box
         raisim::Box* obstacle; //box
         std::size_t ee_frame_index; //frame index
+
+        std::vector<raisim::Visuals*> reference_traj_points;
+        std::vector<raisim::Visuals*> box_points;
+        raisim::Visuals* set_point;
+
+
 
         //Manipulator state
         raisim::Vec<N_dof> q; //joint positions
@@ -144,6 +150,17 @@ class Raisim_pushing{
         void remove_obstacle();
 
         void save_screenshot(){server.requestSaveScreenshot();}
+
+        //Draw traj, box traj, setpoints
+        void add_traj_point(const std::string &name, double radius, double colorR, double colorG, double colorB, double colorA, double pos_x, double pos_y, double pos_z);
+
+        void add_box_point(const std::string &name, double radius, double colorR, double colorG, double colorB, double colorA, double pos_x, double pos_y, double pos_z);
+
+        void add_setpoint(const std::string &name, double radius, double colorR, double colorG, double colorB, double colorA, double pos_x, double pos_y, double pos_z);
+
+        void move_setpoint(double pos_x, double pos_y, double pos_z);
+
+
         
         ~Raisim_pushing(); //Destructor
 

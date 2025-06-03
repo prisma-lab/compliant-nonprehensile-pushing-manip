@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "~/raisimLib/raisim/linux/include/",
+                "~/raisimLib/thirdParty/Eigen3/include/eigen3/",
+                "~/acados/include/",
+                "~/acados/include/blasfeo/include/",
+                "~/acados/include/hpipm/include/",
+                "/home/user/raisimLib/pushing_reduced/include"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-gcc-x64"
+        }
+    ],
+    "version": 4
+}

@@ -97,6 +97,9 @@ Raisim_pushing::Raisim_pushing(char* arg): world(), server(&world){ //create wor
     world.setMaterialPairProp(box_material, "brass", friction, restitution, res_threshold, static_friction, static_friction_threshold_velocity);
     world.setMaterialPairProp("steel", "steel", 0.2, 0.25, 0.001);
 
+    set_point = nullptr;
+    
+
     //server.startRecordingVideo("snapshot_pushing.png");
 
 }
@@ -274,6 +277,40 @@ void Raisim_pushing::transform_world_2_box(Eigen::Vector3d pos_in, Eigen::Vector
     pos_out_om = T_w_b.inverse()*pos_in_om;
     pos_out << pos_out_om(0), pos_out_om(1), pos_out_om(2);
 }
+
+void Raisim_pushing::add_setpoint(const std::string &name, double radius, double colorR, double colorG, double colorB, double colorA, double pos_x, double pos_y, double pos_z){
+    
+    set_point = server.addVisualSphere(name, radius, colorR, colorG, colorB, colorA);
+    set_point->setPosition(pos_x, pos_y, pos_z);
+}
+
+void Raisim_pushing::move_setpoint(double pos_x, double pos_y, double pos_z){
+    server.lockVisualizationServerMutex();
+    if(set_point != nullptr){
+        set_point->setPosition(pos_x, pos_y, pos_z);
+    }
+    server.unlockVisualizationServerMutex();
+
+}
+
+void Raisim_pushing::add_box_point(const std::string &name, double radius, double colorR, double colorG, double colorB, double colorA, double pos_x, double pos_y, double pos_z){
+    server.lockVisualizationServerMutex();
+    raisim::Visuals*new_visual = server.addVisualSphere(name, radius, colorR, colorG, colorB, colorA);
+    box_points.push_back(new_visual);
+    box_points.back()->setPosition(pos_x, pos_y, pos_z);
+    server.unlockVisualizationServerMutex();
+}
+
+void Raisim_pushing::add_traj_point(const std::string &name, double radius, double colorR, double colorG, double colorB, double colorA, double pos_x, double pos_y, double pos_z){
+    server.lockVisualizationServerMutex();
+    raisim::Visuals*new_visual = server.addVisualSphere(name, radius, colorR, colorG, colorB, colorA);
+    reference_traj_points.push_back(new_visual);
+    reference_traj_points.back()->setPosition(pos_x, pos_y, pos_z);
+    reference_traj_points.erase(reference_traj_points.begin());
+    server.unlockVisualizationServerMutex();
+
+}
+
 
 
 

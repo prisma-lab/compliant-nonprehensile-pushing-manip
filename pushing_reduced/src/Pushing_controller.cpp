@@ -9,8 +9,8 @@
 //_SAVE_VIDEO_FRAMES_: The video frames are saved in the current folder (this makes simulation very slow). Then, to generate video, run 
 //ffmpeg -framerate 25 -i screenshot%d.png -c:v libx264 -r 25 -pix_fmt yuv420p output.mp4
 
-#define _PASSIVE_FILTER_
-#define _SPAWN_OBSTACLE_
+//#define _PASSIVE_FILTER_
+//#define _SPAWN_OBSTACLE_
 //#define _SAVE_VIDEO_FRAMES_
 
 
@@ -438,8 +438,18 @@ void Pushing_controller::control_loop(){
     Window targetWindow = findWindowByTitle(display, root, targetTitle);
 
 
+    //Draw reference trajectory
+    int drawn_traj_sample = 0;
+    while(drawn_traj_sample < int(des_trajectory[0].size())){
+        char buffer[100];
+        sprintf(buffer, "name%d", drawn_traj_sample);
+        add_traj_point(buffer, 0.01, 1, 1, 0, 0.0, des_trajectory[0][drawn_traj_sample],des_trajectory[1][drawn_traj_sample], 0.05);
+        drawn_traj_sample += 100;
+    }
 
-
+    
+    int index_obj_points= 0;
+ 
     //Control loop
 
     while(traj_sample < int(des_trajectory[0].size())){
@@ -552,9 +562,23 @@ void Pushing_controller::control_loop(){
         ee_des_pos(0) = x_d_p_world(0); ee_des_pos(1) = x_d_p_world(1);
         ee_des_lin_vel(0) = x_d_p_dot_world(0); ee_des_lin_vel(1) = x_d_p_dot_world(1); 
         
-    
+        //Draw manipulator ee setpoint
+        if(traj_sample == 0){
+            add_setpoint("set_point", 0.015, 0, 1, 0, 1, ee_des_pos(0), ee_des_pos(1), ee_des_pos(2));
+        }
+        move_setpoint(ee_des_pos(0), ee_des_pos(1), ee_des_pos(2));
+
         //Perform manipulator motion control
         manip_motion_ctrl_1_step(ee_des_pos, ee_des_lin_vel, ee_des_orient_R, ee_des_ang_vel);
+
+        //Draw object traj
+        std::string name_obj_points;
+        name_obj_points = "obj"+std::to_string(index_obj_points);
+        if(index_obj_points%100 == 0){
+            add_box_point(name_obj_points, 0.01, 0, 0, 1, 1, box_pos(0), box_pos(1), box_pos(2));
+        }
+        index_obj_points ++;
+
 
         //Spawn obstacle in time interval [3,5] seconds
         double t= get_time();
