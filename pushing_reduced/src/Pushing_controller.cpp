@@ -11,7 +11,7 @@
 
 //#define _PASSIVE_FILTER_
 //#define _SPAWN_OBSTACLE_
-//#define _SAVE_VIDEO_FRAMES_
+#define _SAVE_VIDEO_FRAMES_
 
 
 namespace pushing_controller{
@@ -443,10 +443,10 @@ void Pushing_controller::control_loop(){
     while(drawn_traj_sample < int(des_trajectory[0].size())){
         char buffer[100];
         sprintf(buffer, "name%d", drawn_traj_sample);
-        add_traj_point(buffer, 0.01, 1, 1, 0, 0.0, des_trajectory[0][drawn_traj_sample],des_trajectory[1][drawn_traj_sample], 0.05);
+        add_traj_point(buffer, 0.005, 1.0, 0.843, 0.0, 0.5, des_trajectory[0][drawn_traj_sample],des_trajectory[1][drawn_traj_sample], 0.045);
         drawn_traj_sample += 100;
     }
-
+    
     
     int index_obj_points= 0;
  
@@ -575,7 +575,7 @@ void Pushing_controller::control_loop(){
         std::string name_obj_points;
         name_obj_points = "obj"+std::to_string(index_obj_points);
         if(index_obj_points%100 == 0){
-            add_box_point(name_obj_points, 0.01, 0, 0, 1, 1, box_pos(0), box_pos(1), box_pos(2));
+            add_box_point(name_obj_points, 0.005, 0, 0, 1, 1, box_pos(0), box_pos(1), box_pos(2));
         }
         index_obj_points ++;
 
