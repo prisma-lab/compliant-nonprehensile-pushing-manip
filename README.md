@@ -40,7 +40,7 @@ Then log out and log in.
 
 1. Clone the repo.
 ```sh
-git clone https://github.com/prisma-lab/compliant-nonprehensile-pushing-manip.git
+git clone https://github.com/prisma-lab/compliant-pushing-manip-sim.git
 ```
 
 2. If you already have the Raisim license, jump to the point 4. Otherwise, proceed with point 2 and 3. 
